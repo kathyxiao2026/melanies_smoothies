@@ -49,6 +49,6 @@ if ingredients_list:
 
 import requests  
 # smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)")  
-smoothiefroot_response = requests.get("[https://docs.python-requests.org/en/latest](https://docs.python-requests.org/en/latest)")  
+smoothiefroot_response = requests.get("[https://docs.python-requests.org/en/latest]")  
 
 st.text(smoothiefroot_response)
