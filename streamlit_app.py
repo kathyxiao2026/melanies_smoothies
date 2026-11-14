@@ -1,7 +1,7 @@
 # Import python packages
 import streamlit as st
 import os
-from snowflake.snowpark.context import get_active_session
+# from snowflake.snowpark.context import get_active_session                  # remove this line in SniS
 from snowflake.snowpark.functions import col
 
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
@@ -12,8 +12,9 @@ name_on_order = st.text_input("Name on Smoothie:")
 if name_on_order:
     st.write('The name on your Smoothie will be:', name_on_order)
 
-session = get_active_session();
-# st.write("active session:", session)
+# session = get_active_session();        # in SiS
+cnx = st.connection("snowflake")         # in SniS
+session = cnx.session()
 
 # my_dataframe = session.table("smoothies.public.fruit_options")
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
