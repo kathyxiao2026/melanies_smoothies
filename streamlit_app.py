@@ -3,6 +3,7 @@ import streamlit as st
 import os
 # from snowflake.snowpark.context import get_active_session                  # remove this line in SniS
 from snowflake.snowpark.functions import col
+import requests  
 
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write("""Choose the fruites you want in your custom Smoothie!""")
@@ -34,6 +35,9 @@ if ingredients_list:
 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen +' '
+        
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon") 
+        sf_df=st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     st.write(ingredients_string)
 
@@ -47,10 +51,6 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered!', icon="✅")
 
-import requests  
-# smoothiefroot_response = requests.get("[https://my.smoothiefroot.com/api/fruit/watermelon](https://my.smoothiefroot.com/api/fruit/watermelon)") 
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon") 
-# st.text(smoothiefroot_response.json())
-
-# put the JSON into a dataframe
-sf_df=st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+# import requests  
+# smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon") 
+# sf_df=st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
