@@ -18,8 +18,10 @@ cnx = st.connection("snowflake")         # in SniS
 session = cnx.session()
 
 # my_dataframe = session.table("smoothies.public.fruit_options")
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
-#st.dataframe(data=my_dataframe, use_container_width=True)
+# my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+# st.dataframe(data=my_dataframe, use_container_width=True)
+
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'),col('SEARCH_ON'))
 
 ingredients_list = st.multiselect (
     'Choose up to 5 ingredients:'
